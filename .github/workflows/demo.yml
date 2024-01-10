@@ -1,0 +1,28 @@
+name: One repo to update a file in another repo
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    step:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          repository: darshanwohlig19/devops2 
+          ref: main
+      
+      # - name: Repository update
+      #    run: devops2 ./github/workflows/demo.yml
+
+      - name: Push the code
+        run: | 
+          git config --global user.email "darshan.gada@wohlig.com"
+          git config --global user.name "darshanwohlig19"
+          git add .
+          git commit -m "new"
+          git push
+       
