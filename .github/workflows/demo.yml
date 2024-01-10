@@ -15,6 +15,9 @@ jobs:
           repository: darshanwohlig19/devops2 
           ref: main
       
+      - name: Repository update
+         run: devops2 ./github/workflows/demo.yml
+
       - name: Push the code
         run: | 
           git config --global user.email "darshan.gada@wohlig.com"
