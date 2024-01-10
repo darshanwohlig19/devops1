@@ -1,35 +1,29 @@
-name: wohlig devops test
+name: Build, Push, and Deploy
  
 on:
   push:
     branches:
-      - 'main'
- 
-env:
-  GITHUB_TOKEN: ${{ secrets.TOKEN100 }}
+      - main
  
 jobs:
-  update-file:
+  build-and-deploy:
     runs-on: ubuntu-latest
+ 
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: update file
-        run: |
-          git config --global user.email "darshan.gada@wohlig.com"
-          git config --global user.name "darshanwohlig19"
-          git clone https://darshanwohlig19:${{ secrets.TOKEN100 }}@github.com/darshanwohlig19/devops2.git
-          git pull
-          cd test-gitops
-          
-          count=$(grep -oP 'my commit count is : \K\d+' demo.txt)
-          echo $((count + 50)) > count.txt
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-          git add .
-          git commit -m "update new count"
- 
-          git status
- 
-          git push --set-upstream origin main
- 
-          git status
+      - name: add_repo_and_change
+        run: |
+            git clone "https://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@github.com/darshanwohlig19/devops2.git"
+            cd test-gitops
+            git checkout main
+            git config user.name "darshanwohlig19"
+            git config user.email "darshan.gada@wohlig.com"
+            commit_count=$(($(grep -oP 'my commit count is : \K\d+' text.txt) + 50))
+            sed -i "s/my commit count is : [0-9]\+/my commit count is : $commit_count/" demo.txt
+            cat demo.txt
+            echo "my commit count is"
+            git add . 
+            git commit -m "change"
+            git push origin main
