@@ -16,7 +16,7 @@ jobs:
           ref: main
       
       - name: Repository update
-         run: devops2 ./github/workflows/demo.yml
+         run: devops2 ./github/workflows/demo.yaml
 
       - name: Push the code
         run: | 
