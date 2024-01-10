@@ -1,0 +1,35 @@
+name: wohlig devops test
+ 
+on:
+  push:
+    branches:
+      - 'uat'
+ 
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN100 }}
+ 
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: update file
+        run: |
+          git config --global user.email "darshan.gada@wohlig.com"
+          git config --global user.name "darshanwohlig19"
+          git clone https://darshanwohlig19:${{ secrets.TOKEN100 }}@github.com/darshanwohlig19/devops2.git
+          git pull
+          cd test-gitops
+          
+          count=$(grep -oP 'my commit count is : \K\d+' demo.txt)
+          echo $((count + 50)) > count.txt
+
+          git add .
+          git commit -m "update new count"
+ 
+          git status
+ 
+          git push --set-upstream origin main
+ 
+          git status
