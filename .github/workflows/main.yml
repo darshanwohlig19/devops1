@@ -1,29 +1,28 @@
-name: Build, Push, and Deploy
- 
+name: Update file
 on:
   push:
     branches:
       - main
- 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
- 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: add_repo_and_change
-        run: |
-            git clone "https://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@github.com/darshanwohlig19/devops2.git"
-            cd test-gitops
-            git checkout main
-            git config user.name "darshanwohlig19"
-            git config user.email "darshan.gada@wohlig.com"
-            commit_count=$(($(grep -oP 'my commit count is : \K\d+' text.txt) + 50))
-            sed -i "s/my commit count is : [0-9]\+/my commit count is : $commit_count/" demo.txt
-            cat demo.txt
-            echo "my commit count is"
-            git add . 
-            git commit -m "change"
-            git push origin main
+jobs:
+    push:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout Repository
+         uses: actions/checkout@v2
+
+       - name: Update File
+         run: | 
+          count=$(($(cat second-test.txt | grep -oP '(\d+)' || echo 0) + 50))
+          echo "hello i am devops"
+          echo "my commit count is : $count"
+          echo "thank you"
+       - name: setup git config
+         run: |
+          git config --global user.email "swathi.cherala@wohlig.com"
+          git config --global user.name "swathiwohlig"
+          git add test.txt
+          git commit -m “Incremented by 50 number" 
+          - run: git push origin main
+
+
