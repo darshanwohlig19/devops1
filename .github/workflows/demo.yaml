@@ -11,10 +11,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      - name: Repository update
-         run: devops2 ./github/workflows/demo.yaml
-
+         with:
+           repository: darshanwohlig19/devops2
+            ref: main
+     
+  
+      - name: Update File
+      run: |         
+       file_path="" 
+       commit_count=$(grep -oP 'my commit count is : \K\d+' $file_path)new_count=$((commit_count + 50))
+       sed -i "s/my commit count is : $commit_count/my commit count is : $new_count/" $file_path
+   
       - name: Push the code
         run: | 
           git config --global user.email "darshan.gada@wohlig.com"
