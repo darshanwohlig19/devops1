@@ -13,6 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Change to repository directory
+        run: cd file-to-update  # Replace 'file-to-update' with your repository's directory name if different
+
       - name: Update File
         run: |
           file="update.txt"
