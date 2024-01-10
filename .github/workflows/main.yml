@@ -1,28 +1,29 @@
-name: Update file
+name: Update File on UAT Commit
+
 on:
   push:
     branches:
       - main
 
 jobs:
-    push:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Checkout Repository
-         uses: actions/checkout@v2
+  update-file:
+    runs-on: ubuntu-latest
 
-       - name: Update File
-         run: | 
-          count=$(($(cat demo.txt | grep -oP '(\d+)' || echo 0) + 50))
-          echo "hello i am devops"
-          echo "my commit count is : $count"
-          echo "thank you"
-       - name: setup git config
-         run: |
-          git config --global user.email "darshan.gada@wohlig.com"
-          git config --global user.name "darshanwohlig19"
-          git add test.txt
-          git commit -m “Incremented by 50 number" 
-          - run: git push origin main
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
+      - name: Update File
+        run: |
+          file="demo.txt"
+          count=$(grep -oP 'my commit count is: \K(\d+)' $file)
+          new_count=$((count + 50))
+          sed -i "s/my commit count is: $count/my commit count is: $new_count/" $file
 
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "darshan.gada@wohlig.com"
+          git config --local user.name "darshanwohlig19"
+          git add demo.txt
+          git commit -m "Increment commit count by 50"
+          git push
