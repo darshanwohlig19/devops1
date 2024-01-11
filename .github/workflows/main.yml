@@ -28,6 +28,6 @@ jobs:
           echo "Commit count updated to: $new_commit_count"
           cat demo.txt
           git add .
-          git remote set-url origin git@github.com:darshanwohlig19/devops2.git
+          git remote set-url origin https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
           git commit -m "testt"
-          git push origin main
+          git push --set-upstream origin main
