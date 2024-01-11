@@ -29,6 +29,6 @@ jobs:
 
       - name: Commit changes to devops2
         run: |
-          git add demo.txt
+          git add .
           git commit -m "Increment commit count"
           git push origin main
