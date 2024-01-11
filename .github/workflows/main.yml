@@ -14,22 +14,19 @@ jobs:
     steps:
       - name: checkout test-commits
         uses: actions/checkout@v3
-      - name: checkout test-gitops
-        run: git clone https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
       - name: configure git
         run: |
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
       - name: update file
         run: |
-          cd devops2
-          echo "Updated content" > demo.txt
+          echo "Updated content" > devops2/demo.txt
 
-          git add .
+          git add devops2/demo.txt
           git commit -m "update new image"
  
           git status
  
-          git push --set-upstream origin main
+          git push origin main
  
           git status
