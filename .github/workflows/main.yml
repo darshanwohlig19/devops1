@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
@@ -22,7 +23,7 @@ jobs:
       - name: update file
         run: |
           cd devops2
-          txt demo.txt
+          echo "Updated content" > demo.txt
 
           git add .
           git commit -m "update new image"
