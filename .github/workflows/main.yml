@@ -17,7 +17,7 @@ jobs:
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
           git config --global credential.helper store
-          echo "https://darshanwohlig19:${{ secrets.TOKEN }}@github.com" > ~/.git-credentials
+          echo "https://darshanwohlig19:${{ secrets.TOKEN }}github.com/darshanwohlig19/devops2.git
 
       - name: Ensure demo.txt exists
         run: touch demo.txt
@@ -30,5 +30,6 @@ jobs:
       - name: Commit changes to devops2
         run: |
           git add .
+          git remote set-url origin "https://darshanwohlig19:${{ secrets.TOKEN }}github.com/darshanwohlig19/devops2.git
           git commit -m "Increment commit count"
           git push origin main
