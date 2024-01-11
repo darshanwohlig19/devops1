@@ -22,7 +22,7 @@ jobs:
       - name: update file
         run: |
           cd devops2
-          demo.txt
+          txt demo.txt
 
           git add .
           git commit -m "update new image"
