@@ -20,7 +20,7 @@ jobs:
           git config --global user.name "darshanwohlig19"
       - name: update file
         run: |
-          echo "Updated content" > devops2/blob/main/demo.txt
+          echo "Updated content" > /devops2/blob/main/demo.txt
 
           git add devops2/demo.txt
           git commit -m "update new image"
