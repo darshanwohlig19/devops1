@@ -29,5 +29,5 @@ jobs:
           cat demo.txt
           git add .
           git remote set-url origin https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
-          git commit -m "test"
+          git commit -m "testt"
           git push origin main
