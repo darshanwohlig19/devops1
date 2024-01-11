@@ -1,35 +1,33 @@
-name: Update File on Commit
-
+name: Update File on Main Branch Commit
+ 
 on:
   push:
     branches:
       - main
+ 
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
-  
+ 
 jobs:
-  updateFile:
-    runs-on: ubuntu-latest-
+  update-file:
+    runs-on: ubuntu-latest
+ 
     steps:
-      - name: Checkout devops1 repository
-        uses: actions/checkout@v2
-
-      - name: Set up Git
+      - name: checkout test-commits
+        uses: actions/checkout@v3
+      - name: commit
         run: |
+          git clone https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
+          cd Test-3
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
-          echo "https://darshanwohlig19:${{ secrets.TOKEN }}github.com/darshanwohlig19/devops2.git
-
-      - name: Ensure demo.txt exists
-        run: touch demo.txt
-
-      - name: Increment commit count in devops2 repo
-        run: |
-          count=$(($(< demo.txt)+50))
-          echo $count > demo.txt
-
-      - name: Commit changes to devops2
-        run: |
+          cat demo.txt
+          commit_count=$(grep -oP '(?<=commit count is : )\d+' demo.txt)
+          new_commit_count=$((commit_count + 50))
+          sed -i "s/commit count is : $commit_count/commit count is : $new_commit_count/" demo.txt
+          echo "Commit count updated to: $new_commit_count"
+          cat demo.txt
           git add .
-          git commit -m "Increment commit count"
+          git remote set-url origin https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
+          git commit -m "test"
           git push origin main
