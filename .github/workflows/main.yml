@@ -3,7 +3,7 @@ name: wohlig devops test
 on:
   push:
     branches:
-      - 'main'
+      - 'uat'
 
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
