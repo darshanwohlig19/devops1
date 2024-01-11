@@ -18,7 +18,7 @@ jobs:
       - name: commit
         run: |
           git clone https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
-          cd Test-3
+          cd demo
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
           cat demo.txt
