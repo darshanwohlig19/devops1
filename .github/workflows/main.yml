@@ -1,32 +1,29 @@
-name: wohlig devops test
+name: Update File on Commit
 
 on:
   push:
     branches:
-      - 'uat'
-
-env:
-  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - uat
 
 jobs:
-  update-file:
+  updateFile:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout test-commits
-        uses: actions/checkout@v3
-      - name: configure git
+      - name: Checkout devops1 repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
         run: |
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
-      - name: update file
-        run: |
-          echo "Updated content" > /devops2/blob/main/demo.txt
 
-          git add devops2/demo.txt
-          git commit -m "update new image"
- 
-          git status
- 
-          git push origin main
- 
-          git status
+      - name: Increment commit count in devops2 repo
+        run: |
+          count=$(($(< demo.txt)+50))
+          echo $count > demo.txt
+
+      - name: Commit changes to devops2
+        run: |
+          git add demo.txt
+          git commit -m "Increment commit count"
+          git push origin uat
