@@ -26,4 +26,4 @@ jobs:
         run: |
           git add demo.txt
           git commit -m "Increment commit count"
-          git push origin uat
+          git push origin main
