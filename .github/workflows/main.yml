@@ -1,4 +1,5 @@
-name: Github Actions in one repo to update a file in another repo when anything is commited on uat branch
+name: wohlig devops test
+
 on:
   push:
     branches:
@@ -8,16 +9,27 @@ env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
 jobs:
-  push_and_deploy:
-    name: Github Actions in one repo to update a file in another repo when anything is commited on uat branch
+  update-file:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: checkout test-commits
         uses: actions/checkout@v3
-      
-      - name: commit
+      - name: checkout test-gitops
+        run: git clone https://darshanwohlig19:${{ secrets.TOKEN }}@github.com/darshanwohlig19/devops2.git
+      - name: configure git
         run: |
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
-          git clone https://darshanwohlig19:${{ secrets.TOKEN100 }}@github.com/darshanwohlig19/devops2.git
-          cd manifest
+      - name: update file
+        run: |
+          cd devops2
+          python3 update_file.py
+
+          git add .
+          git commit -m "update new image"
+ 
+          git status
+ 
+          git push --set-upstream origin main
+ 
+          git status
