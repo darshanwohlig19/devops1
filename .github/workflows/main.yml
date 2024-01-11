@@ -9,7 +9,7 @@ env:
   
 jobs:
   updateFile:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-
     steps:
       - name: Checkout devops1 repository
         uses: actions/checkout@v2
