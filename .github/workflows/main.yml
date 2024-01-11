@@ -2,7 +2,7 @@ name: Github Actions in one repo to update a file in another repo when anything 
 on:
   push:
     branches:
-      - 'uat'
+      - 'main'
 
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
