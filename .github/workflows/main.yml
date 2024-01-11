@@ -23,7 +23,7 @@ jobs:
       - name: update file
         run: |
           cd devops2
-          python3 update_file.py
+          python3 demo.txt
 
           git add .
           git commit -m "update new image"
