@@ -17,6 +17,9 @@ jobs:
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
 
+      - name: Ensure demo.txt exists
+        run: touch demo.txt
+
       - name: Increment commit count in devops2 repo
         run: |
           count=$(($(< demo.txt)+50))
