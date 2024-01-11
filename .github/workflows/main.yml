@@ -16,6 +16,8 @@ jobs:
         run: |
           git config --global user.email "darshan.gada@wohlig.com"
           git config --global user.name "darshanwohlig19"
+          git config --global credential.helper store
+          echo "https://darshanwohlig19:${{ secrets.TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Ensure demo.txt exists
         run: touch demo.txt
